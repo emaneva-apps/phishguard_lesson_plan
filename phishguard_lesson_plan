@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивна рамка: Невидимите капани</title>
+    <!-- Зареждане на Tailwind CSS за стилизация -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Премахнато зареждане на Google Fonts -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+    <!-- <link rel="preconnect" href="https://fonts.gstatic" crossorigin> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto+Mono&display=swap" rel="stylesheet"> -->
+    
+    <style>
+        :root {
+            /* Дефинираме основните неонови цветове */
+            --neon-cyan: #0891b2; /* Tailwind cyan-600 */
+            --neon-pink: #db2777; /* Tailwind pink-600 */
+            --neon-green: #16a34a; /* Tailwind green-600 */
+            --neon-red: #dc2626;   /* Tailwind red-600 */
+            --neon-yellow: #ca8a04; /* Tailwind yellow-600 */
+        }
+        
+        body {
+            /* Новият шрифт за целия текст */
+            font-family: 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+        }
+
+        /* Клас за заглавията */
+        .font-orbitron {
+            font-family: 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+        }
+
+        /* Персонализирани класове за "неонов" ефект */
+        .text-glow-cyan {
+            /* color: var(--neon-cyan); - Премахнато, за да се контролира от Tailwind */
+            /* Лека сянка за "светене" "под" текста*/
+            text-shadow: 0 0 5px #fff, 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan), 0 0 30px var(--neon-cyan);
+        }
+        .text-glow-pink {
+            /* color: var(--neon-pink); - Премахнато, за да се контролира от Tailwind (text-white) */
+            text-shadow: 0 2px 8px var(--neon-pink), 0 1px 15px var(--neon-pink), 0 0 3px #fff;
+        }
+
+        /* Сянка за "светещи" контейнери */
+        .shadow-glow-pink {
+            box-shadow: 0 0 12px rgba(219, 39, 119, 0.4);
+        }
+        .shadow-glow-cyan {
+            box-shadow: 0 0 12px rgba(8, 145, 178, 0.4);
+        }
+
+        /* Стил за вграденото съдържание */
+        iframe {
+            /* Промяна на рамката да пасва на тъмната тема */
+            border: 1px solid #334155; /* slate-700 */
+            border-radius: 0.5rem; /* rounded-lg */
+            min-height: 500px; /* Осигурява височина */
+        }
+        
+        /* Стил за акордеона (details/summary) */
+        summary {
+            cursor: pointer;
+            padding: 1rem;
+            /* bg-slate-700 text-cyan-400 */
+            background-color: #334155; 
+            color: #22d3ee;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+        summary:hover {
+            background-color: #475569; /* slate-600 */
+        }
+        details[open] summary {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            background-color: #475569; /* slate-600 */
+        }
+        .accordion-content {
+            padding: 1rem;
+            /* bg-slate-800 border-slate-700 */
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-top: 0;
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+        }
+        
+        /* Скриване на маркера по подразбиране */
+        summary {
+           list-style: none;
+        }
+        summary::-webkit-details-marker {
+           display: none;
+        }
+        summary::after {
+            content: '+';
+            float: right;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+        details[open] summary::after {
+            content: '−';
+        }
+    </style>
+</head>
+<!-- Промяна на фона и основния текст -->
+<body class="bg-slate-900 text-gray-200">
+
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+
+        <!-- Заглавие на урока -->
+        <header class="text-center mb-12">
+            <!-- Добавени класове за шрифт и неон -->
+            <h1 class="text-3xl sm:text-4xl font-bold font-orbitron text-glow-cyan text-white uppercase">Невидимите капани</h1>
+            <p class="text-lg sm:text-xl text-gray-400 mt-2">Как да защитим финансите си онлайн?</p>
+        </header>
+
+        <!-- ЧАСТ 1: ПЪРВИ СБЛЪСЪК (ОПИТ) -->
+        <section id="part1" class="mb-12 p-6 bg-slate-800 rounded-lg shadow-glow-pink border border-pink-800">
+            <h2 class="text-2xl font-bold mb-6 text-glow-pink text-white uppercase">Част 1: Първи сблъсък</h2>
+            <p class="mb-4">Имате 5 минути за индивидуалнa игра. Целта е да видите колко 'XP' можете да съберете и колко дълго ще опазите 'Портфейла' си. Не се притеснявайте, ако 'фалирате' – това е част от ученето.</p>
+            
+            <!-- Таймер -->
+            <div class="timer-container bg-slate-700 p-4 rounded-lg flex items-center justify-center flex-wrap space-x-4 mb-6 shadow-glow-cyan border border-cyan-700">
+                <span class="text-lg font-semibold">Таймер:</span>
+                <!-- Промяна на бутоните -->
+                <button id="timer-minus-1" class="bg-cyan-800 hover:bg-cyan-700 text-cyan-200 font-bold w-8 h-8 rounded-full disabled:opacity-50">-</button>
+                <span id="timer-display-1" class="text-3xl font-bold text-cyan-400 w-24 text-center tabular-nums">05:00</span>
+                <button id="timer-plus-1" class="bg-cyan-800 hover:bg-cyan-700 text-cyan-200 font-bold w-8 h-8 rounded-full disabled:opacity-50">+</button>
+                <!-- Промяна на бутона "Старт" -->
+                <button id="timer-start-1" class="bg-cyan-600 hover:bg-cyan-500 text-slate-900 font-semibold px-6 py-2 rounded-lg transition-all min-w-[100px]">Старт</button>
+            </div>
+
+            <div id="game-embed-container" class="w-full rounded-lg overflow-hidden">
+                <!-- Играта е вградена директно -->
+                <iframe src="https://prepodavame-phishguard.vercel.app/" width="100%" height="500" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <!-- ЧАСТ 2: ЕКСПЕРТЕН АНАЛИЗ -->
+        <section id="part2" class="mb-12 p-6 bg-slate-800 rounded-lg shadow-glow-pink border border-pink-800">
+            <h2 class="text-2xl font-bold mb-6 text-glow-pink text-white uppercase">Част 2: Експертен анализ</h2>
+            <p class="mb-6">Видяхме, че е лесно да се сбърка. Сега нека анализираме основните типове атаки, като гледаме видеата на експертите. Отворете всяко видео едно по едно.</p>
+
+            <div class="space-y-4">
+                <details id="video-1-accordion">
+                    <summary>Видео 1: Интро</summary>
+                    <div class="accordion-content">
+                        <div id="video-1-embed-container" class="w-full rounded-lg overflow-hidden">
+                            <!-- Видеото е вградено директно -->
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/A_A8jLID5yk?si=45T4HNGuapxRF48a" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-600">
+                            <h4 class="font-semibold text-cyan-500 mb-2">Въпрос за дискусия:</h4>
+                            <p class="text-gray-300">Какво беше усещането, докато играхте играта? Лесно ли беше, или трудно?</p>
+                        </div>
+                    </div>
+                </details>
+                <details id="video-2-accordion">
+                    <summary>Видео 2: Фишинг (Phishing)</summary>
+                    <div class="accordion-content">
+                        <div id="video-2-embed-container" class="w-full rounded-lg overflow-hidden">
+                            <!-- Видеото е вградено директно -->
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/A_A8jLID5yk?si=45T4HNGuapxRF48a" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-600">
+                            <h4 class="font-semibold text-cyan-500 mb-2">Въпрос за дискусия:</h4>
+                            <p class="text-gray-300">Някой преживявал ли е такова нещо? Или познавате ли някой, който е?</p>
+                        </div>
+                    </div>
+                </details>
+                <details id="video-3-accordion">
+                    <summary>Видео 3: Смишинг (Smishing)</summary>
+                    <div class="accordion-content">
+                        <div id="video-3-embed-container" class="w-full rounded-lg overflow-hidden">
+                            <!-- Видеото е вградено директно -->
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/A_A8jLID5yk?si=45T4HNGuapxRF48a" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-600">
+                            <h4 class="font-semibold text-cyan-500 mb-2">Въпрос за дискусия:</h4>
+                            <p class="text-gray-300">Това сигурно ви е по-познато от SMS-ите. Някой да даде пример?</p>
+                        </div>
+                    </div>
+                </details>
+                <details id="video-4-accordion">
+                    <summary>Видео 4: Скиминг (Skimming)</summary>
+                    <div class="accordion-content">
+                        <div id="video-4-embed-container" class="w-full rounded-lg overflow-hidden">
+                            <!-- Видеото е вградено директно -->
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/A_A8jLID5yk?si=45T4HNGuapxRF48a" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-600">
+                            <h4 class="font-semibold text-cyan-500 mb-2">Въпрос за дискусия:</h4>
+                            <p class="text-gray-300">Това е физическа атака. Някой виждал ли е странни устройства по банкомати?</p>
+
+                        </div>
+                    </div>
+                </details>
+                <details id="video-5-accordion">
+                    <summary>Видео 5: Скуотинг (Typosquatting)</summary>
+                    <div class="accordion-content">
+                        <div id="video-5-embed-container" class="w-full rounded-lg overflow-hidden">
+                            <!-- Видеото е вградено директно -->
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/A_A8jLID5yk?si=45T4HNGuapxRF48a" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-600">
+                            <h4 class="font-semibold text-cyan-500 mb-2">Въпрос за дискусия:</h4>
+                            <p class="text-gray-300">Случвало ли ви се е да сбъркате буква в адрес на сайт? Това е 'скуотинг'.</p>
+                        </div>
+                    </div>
+                </details>
+                <details id="video-6-accordion">
+                    <summary>Видео 6: Спуфинг (Spoofing)</summary>
+                    <div class="accordion-content">
+                        <div id="video-6-embed-container" class="w-full rounded-lg overflow-hidden">
+                            <!-- Видеото е вградено директно -->
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/A_A8jLID5yk?si=45T4HNGuapxRF48a" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-600">
+                            <h4 class="font-semibold text-cyan-500 mb-2">Въпрос за дискусия:</h4>
+                            <p class="text-gray-300">Това е много коварно – фалшив имейл или обаждане от уж познат. Кой се е сблъсквал?</p>
+                        </div>
+                    </div>
+                </details>
+                <details id="video-7-accordion">
+                    <summary>Видео 7: Финални насоки</summary>
+                    <div class="accordion-content">
+                        <div id="video-7-embed-container" class="w-full rounded-lg overflow-hidden">
+                            <!-- Видеото е вградено директно -->
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/A_A8jLID5yk?si=45T4HNGuapxRF48a" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-600">
+                            <h4 class="font-semibold text-cyan-500 mb-2">Въпрос за дискусия:</h4>
+                            <p class="text-gray-300">Коя от финалните насоки ви се струва най-важна или най-трудна за спазване?</p>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- ЧАСТ 3: ЛОВ НА ИЗМАМИ (ПРИЛАГАНЕ) - ВЪЗСТАНОВЕНА -->
+        <section id="part3" class="mb-12 p-6 bg-slate-800 rounded-lg shadow-glow-pink border border-pink-800">
+            <h2 class="text-2xl font-bold mb-4 text-glow-pink text-white uppercase">Част 3: "Лов на измами" – Прилагане</h2>
+            <p class="mb-4">Сега ще играете отново, но този път по двойки. Вашата мисия е да играете заедно и да бъдете "детективи". Опитайте се да намерите в играта поне по един пример за всеки от 5-те типа измами, които видяхме във видеата.</p>
+            
+             <!-- Таймер -->
+             <div class="timer-container bg-slate-700 p-4 rounded-lg flex items-center justify-center flex-wrap space-x-4 mb-6 shadow-glow-cyan border border-cyan-700">
+                <span class="text-lg font-semibold">Таймер:</span>
+                <button id="timer-minus-3" class="bg-cyan-800 hover:bg-cyan-700 text-cyan-200 font-bold w-8 h-8 rounded-full disabled:opacity-50">-</button>
+                <span id="timer-display-3" class="text-3xl font-bold text-cyan-400 w-24 text-center tabular-nums">05:00</span>
+                <button id="timer-plus-3" class="bg-cyan-800 hover:bg-cyan-700 text-cyan-200 font-bold w-8 h-8 rounded-full disabled:opacity-50">+</button>
+                <button id="timer-start-3" class="bg-cyan-600 hover:bg-cyan-500 text-slate-900 font-semibold px-6 py-2 rounded-lg transition-all min-w-[100px]">Старт</button>
+            </div>
+
+             <div id="game-embed-container-part3" class="w-full rounded-lg overflow-hidden">
+                <!-- Играта е вградена директно -->
+                <iframe src="https://prepodavame-phishguard.vercel.app/" width="100%" height="500" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <!-- Checklist -->
+            <div class="teacher-checklist mt-8 p-6 bg-slate-700 rounded-lg border border-cyan-700 shadow-glow-cyan">
+                <h3 class="text-xl font-semibold text-cyan-400 mb-4 font-orbitron">Чеклист: Кои капани открихте?</h3>
+                <p class="text-gray-400 mb-5">След като приключите с "Лова на измами", отбележете кои от основните типове атаки успяхте да откриете в играта.</p>
+                <div class="space-y-3">
+                    <!-- Промяна: Добавен 'peer' на input-а и 'peer-checked:*' на span-а -->
+                    <label class="flex items-center text-gray-200 text-lg hover:text-cyan-400 transition-colors duration-150 cursor-pointer">
+                        <input type="checkbox" class="peer h-5 w-5 bg-slate-900 border-slate-600 accent-green-400 focus:ring-green-400 rounded">
+                        <span class="ml-3 transition-colors peer-checked:text-green-400 peer-checked:font-bold">Фишинг (Phishing)</span>
+                    </label>
+                    <label class="flex items-center text-gray-200 text-lg hover:text-cyan-400 transition-colors duration-150 cursor-pointer">
+                        <input type="checkbox" class="peer h-5 w-5 bg-slate-900 border-slate-600 accent-green-400 focus:ring-green-400 rounded">
+                        <span class="ml-3 transition-colors peer-checked:text-green-400 peer-checked:font-bold">Смишинг (Smishing)</span>
+                    </label>
+                    <label class="flex items-center text-gray-200 text-lg hover:text-cyan-400 transition-colors duration-150 cursor-pointer">
+                        <input type="checkbox" class="peer h-5 w-5 bg-slate-900 border-slate-600 accent-green-400 focus:ring-green-400 rounded">
+                        <span class="ml-3 transition-colors peer-checked:text-green-400 peer-checked:font-bold">Скиминг (Skimming)</span>
+                    </label>
+                    <label class="flex items-center text-gray-200 text-lg hover:text-cyan-400 transition-colors duration-150 cursor-pointer">
+                        <input type="checkbox" class="peer h-5 w-5 bg-slate-900 border-slate-600 accent-green-400 focus:ring-green-400 rounded">
+                        <span class="ml-3 transition-colors peer-checked:text-green-400 peer-checked:font-bold">Скуотинг (Typosquatting)</span>
+                    </label>
+                    <label class="flex items-center text-gray-200 text-lg hover:text-cyan-400 transition-colors duration-150 cursor-pointer">
+                        <input type="checkbox" class="peer h-5 w-5 bg-slate-900 border-slate-600 accent-green-400 focus:ring-green-400 rounded">
+                        <span class="ml-3 transition-colors peer-checked:text-green-400 peer-checked:font-bold">Спуфинг (Spoofing)</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЧАСТ 4: ОБОБЩЕНИЕ И ПРОТОКОЛ - ВЪЗСТАНОВЕНА -->
+        <section id="part4" class="mb-12 p-6 bg-slate-800 rounded-lg shadow-glow-pink border border-pink-800">
+            <h2 class="text-2xl font-bold mb-6 text-glow-pink text-white uppercase">Част 4: Нашият "Кибер Протокол" в 3 стъпки</h2>
+            <p class="mb-6">Атаките са различни, но защитата е сходна. Ето го нашият протокол за действие. Натиснете всяка стъпка, за да видите повече.</p>
+            
+            <div class="space-y-4">
+                
+                <details>
+                    <summary style="background-color: #3f1212; color: #fca5a5; border: 1px solid var(--neon-red);">1. СТОП (Пауза)</summary>
+                    <div class="accordion-content" style="background-color: #1f0a0a; border-color: var(--neon-red);">
+                        <p>Поеми си дъх. Не действай емоционално. Измамниците разчитат на твоите емоции: <strong>Страх</strong> ("Акаунтът ви е блокиран!"), <strong>Алчност</strong> ("Спечелихте!") или <strong>Спешност</strong> ("Платете веднага!"). Спри за секунда.</p>
+                    </div>
+                </details>
+                <details>
+                    <summary style="background-color: #3b320a; color: #fde047; border: 1px solid var(--neon-yellow);">2. ПРОВЕРИ (Верифицирай)</summary>
+                    <div class="accordion-content" style="background-color: #1c1a05; border-color: var(--neon-yellow);">
+                        <p>Попитай: "Реално ли е това?" Провери през **друг, независим канал**.</p>
+                        <ul class="list-disc list-inside mt-2">
+                            <li>Ако е имейл от банката, затвори имейла и напиши адреса на банката ръчно в браузъра.</li>
+                            <li>Ако е SMS от куриер, влез в сайта на куриера и провери с номера на пратката.</li>
+                            <li>Ако е обаждане от "познат", затвори и му се обади на номера, който имаш в телефона си.</li>
+                            <li>Провери имейла на подателя за странни букви или домейни.</li>
+                        </ul>
+                    </div>
+                </details>
+                <details>
+                    <summary style="background-color: #0c2a12; color: #86efac; border: 1px solid var(--neon-green);">3. ДЕЙСТВАЙ (Изтрий/Докладвай)</summary>
+                    <div class="accordion-content" style="background-color: #061309; border-color: var(--neon-green);">
+                        <p>След като си се уверил, че е измама:</p>
+                        <ul class="list-disc list-inside mt-2">
+                            <li><strong>Изтрий</strong> съобщението.</li>
+                            <li><strong>Блокирай</strong> подателя.</li>
+                            <li>Никога не отговаряй (дори "Спрете да ми пишете!"), защото това потвърждава, че номерът ти е активен.</li>
+                        </ul>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- ЧАСТ 5: ДОМАШНА РАБОТА -->
+        <section id="part5" class="mb-12 p-6 bg-slate-800 rounded-lg shadow-glow-pink border border-pink-800">
+            <h2 class="text-2xl font-bold mb-6 text-glow-pink text-white uppercase">Домашна работа</h2>
+            <p class="mb-6">Покажете играта на вашите родители, баба или дядо. Изиграйте няколко сценария заедно с тях и им обяснете 'Протокола в 3 стъпки', който създадохме днес. 
+            </p>
+        </section>
+
+    </div>
+
+    <!-- Добавен JavaScript за управление на таймерите -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            /**
+             * Функционалност за настройка на независим таймер.
+             * @param {string} id - Суфиксът за ID-тата на елементите (напр. '1' или '3').
+             */
+            function setupTimer(id) {
+                const display = document.getElementById(`timer-display-${id}`);
+                const startBtn = document.getElementById(`timer-start-${id}`);
+                const plusBtn = document.getElementById(`timer-plus-${id}`);
+                const minusBtn = document.getElementById(`timer-minus-${id}`);
+
+                // Добавяме проверка дали елементите съществуват
+                if (!display || !startBtn || !plusBtn || !minusBtn) {
+                    console.warn(`Timer elements with ID suffix '${id}' not found. Timer not initialized.`);
+                    return; // Прекратява функцията, ако липсват елементи
+                }
+
+                let totalSeconds = 300; // 5 минути по подразбиране
+                let intervalId = null;
+                const minSeconds = 60; // 1 минута
+
+                /** Актуализира дисплея MM:SS */
+                function updateDisplay() {
+                    const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+                    const seconds = String(totalSeconds % 60).padStart(2, '0');
+                    display.textContent = `${minutes}:${seconds}`;
+                }
+
+                /** Логика за броене */
+                function tick() {
+                    if (totalSeconds <= 0) {
+                        clearInterval(intervalId);
+                        intervalId = null;
+                        startBtn.textContent = "Старт";
+                        // Промяна на класовете за "Стоп" (розово)
+                        startBtn.classList.remove('bg-pink-600', 'hover:bg-pink-500');
+                        startBtn.classList.add('bg-cyan-600', 'hover:bg-cyan-500');
+                        plusBtn.disabled = false;
+                        minusBtn.disabled = false;
+                        // Нулиране на таймера
+                        totalSeconds = 300; 
+                        updateDisplay();
+                    } else {
+                        totalSeconds--;
+                        updateDisplay();
+                    }
+                }
+
+                /** Старт/Стоп бутон */
+                startBtn.addEventListener('click', () => {
+                    if (intervalId) { // Ако таймерът работи -> Спри
+                        clearInterval(intervalId);
+                        intervalId = null;
+                        startBtn.textContent = "Старт";
+                        // Промяна на класовете за "Стоп" (розово)
+                        startBtn.classList.remove('bg-pink-600', 'hover:bg-pink-500');
+                        startBtn.classList.add('bg-cyan-600', 'hover:bg-cyan-500');
+                        plusBtn.disabled = false;
+                        minusBtn.disabled = false;
+                    } else { // Ако таймерът е спрян -> Старт
+                        intervalId = setInterval(tick, 1000);
+                        startBtn.textContent = "Стоп";
+                        // Промяна на класовете за "Стоп" (розово)
+                        startBtn.classList.add('bg-pink-600', 'hover:bg-pink-500');
+                        startBtn.classList.remove('bg-cyan-600', 'hover:bg-cyan-500');
+                        plusBtn.disabled = true;
+                        minusBtn.disabled = true;
+                    }
+                });
+
+                /** Бутон + */
+                plusBtn.addEventListener('click', () => {
+                    totalSeconds += 60; // Добавя 1 минута
+                    updateDisplay();
+                });
+
+                /** Бутон - */
+                minusBtn.addEventListener('click', () => {
+                    if (totalSeconds > minSeconds) { // Не позволява да падне под 1 минута
+                        totalSeconds -= 60;
+                        updateDisplay();
+                    }
+                });
+
+                // Първоначално зареждане на дисплея
+                updateDisplay();
+            }
+
+            // Инициализиране на двата таймера
+            setupTimer('1');
+            setupTimer('3'); // Сега тази линия ще работи, защото Част 3 е възстановена
+        });
+    </script>
+
+</body>
+</html>
