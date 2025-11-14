@@ -11,6 +11,9 @@
     <!-- <link rel="preconnect" href="https://fonts.gstatic" crossorigin> -->
     <!-- <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto+Mono&display=swap" rel="stylesheet"> -->
     
+    <!-- Добавяне на Lucide икони -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
     <style>
         :root {
             /* Дефинираме основните неонови цветове */
@@ -44,6 +47,11 @@
         .text-glow-pink {
             /* color: var(--neon-pink); - Премахнато, за да се контролира от Tailwind (text-white) */
             text-shadow: 0 2px 8px var(--neon-pink), 0 1px 15px var(--neon-pink), 0 0 3px #fff;
+        }
+        
+        /* НОВ КЛАС: Сянка за икони */
+        .icon-glow-pink {
+            filter: drop-shadow(0 0 8px var(--neon-pink)) drop-shadow(0 0 3px #fff);
         }
 
         /* Сянка за "светещи" контейнери */
@@ -123,7 +131,10 @@
 
         <!-- ЧАСТ 1: ПЪРВИ СБЛЪСЪК (ОПИТ) -->
         <section id="part1" class="mb-12 p-6 bg-slate-800 rounded-lg shadow-glow-pink border border-pink-800">
-            <h2 class="text-2xl font-bold mb-6 text-glow-pink text-white uppercase">Част 1: Първи сблъсък</h2>
+            <h2 class="text-2xl font-bold mb-6 text-white uppercase flex items-center gap-x-3">
+                <i data-lucide="gamepad-2" class="w-7 h-7 icon-glow-pink"></i>
+                <span class="text-glow-pink">Част 1: Първи сблъсък</span>
+            </h2>
             <p class="mb-4">Имате 5 минути за индивидуалнa игра. Целта е да видите колко 'XP' можете да съберете и колко дълго ще опазите 'Портфейла' си. Не се притеснявайте, ако 'фалирате' – това е част от ученето.</p>
             
             <!-- Таймер -->
@@ -145,7 +156,10 @@
 
         <!-- ЧАСТ 2: ЕКСПЕРТЕН АНАЛИЗ -->
         <section id="part2" class="mb-12 p-6 bg-slate-800 rounded-lg shadow-glow-pink border border-pink-800">
-            <h2 class="text-2xl font-bold mb-6 text-glow-pink text-white uppercase">Част 2: Експертен анализ</h2>
+            <h2 class="text-2xl font-bold mb-6 text-white uppercase flex items-center gap-x-3">
+                <i data-lucide="clapperboard" class="w-7 h-7 icon-glow-pink"></i>
+                <span class="text-glow-pink">Част 2: Експертен анализ</span>
+            </h2>
             <p class="mb-6">Видяхме, че е лесно да се сбърка. Сега нека анализираме основните типове атаки, като гледаме видеата на експертите. Отворете всяко видео едно по едно.</p>
 
             <div class="space-y-4">
@@ -246,7 +260,10 @@
 
         <!-- ЧАСТ 3: ЛОВ НА ИЗМАМИ (ПРИЛАГАНЕ) - ВЪЗСТАНОВЕНА -->
         <section id="part3" class="mb-12 p-6 bg-slate-800 rounded-lg shadow-glow-pink border border-pink-800">
-            <h2 class="text-2xl font-bold mb-4 text-glow-pink text-white uppercase">Част 3: "Лов на измами" – Прилагане</h2>
+            <h2 class="text-2xl font-bold mb-4 text-white uppercase flex items-center gap-x-3">
+                <i data-lucide="binoculars" class="w-7 h-7 icon-glow-pink"></i>
+                <span class="text-glow-pink">Част 3: "Лов на измами" – Прилагане</span>
+            </h2>
             <p class="mb-4">Сега ще играете отново, но този път по двойки. Вашата мисия е да играете заедно и да бъдете "детективи". Опитайте се да намерите в играта поне по един пример за всеки от 5-те типа измами, които видяхме във видеата.</p>
             
              <!-- Таймер -->
@@ -295,7 +312,10 @@
 
         <!-- ЧАСТ 4: ОБОБЩЕНИЕ И ПРОТОКОЛ - ВЪЗСТАНОВЕНА -->
         <section id="part4" class="mb-12 p-6 bg-slate-800 rounded-lg shadow-glow-pink border border-pink-800">
-            <h2 class="text-2xl font-bold mb-6 text-glow-pink text-white uppercase">Част 4: Нашият "Кибер Протокол" в 3 стъпки</h2>
+            <h2 class="text-2xl font-bold mb-6 text-white uppercase flex items-center gap-x-3">
+                <i data-lucide="shield-check" class="w-7 h-7 icon-glow-pink"></i>
+                <span class="text-glow-pink">Част 4: Нашият "Кибер Протокол" в 3 стъпки</span>
+            </h2>
             <p class="mb-6">Атаките са различни, но защитата е сходна. Ето го нашият протокол за действие. Натиснете всяка стъпка, за да видите повече.</p>
             
             <div class="space-y-4">
@@ -334,7 +354,10 @@
 
         <!-- ЧАСТ 5: ДОМАШНА РАБОТА -->
         <section id="part5" class="mb-12 p-6 bg-slate-800 rounded-lg shadow-glow-pink border border-pink-800">
-            <h2 class="text-2xl font-bold mb-6 text-glow-pink text-white uppercase">Домашна работа</h2>
+            <h2 class="text-2xl font-bold mb-6 text-white uppercase flex items-center gap-x-3">
+                <i data-lucide="book-user" class="w-7 h-7 icon-glow-pink"></i>
+                <span class="text-glow-pink">Домашна работа</span>
+            </h2>
             <p class="mb-6">Покажете играта на вашите родители, баба или дядо. Изиграйте няколко сценария заедно с тях и им обяснете 'Протокола в 3 стъпки', който създадохме днес. 
             </p>
         </section>
@@ -427,13 +450,16 @@
                     }
                 });
 
-                // Първоначално зареждане на дисплея
+// Първоначално зареждане на дисплея
                 updateDisplay();
             }
 
             // Инициализиране на двата таймера
             setupTimer('1');
             setupTimer('3'); // Сега тази линия ще работи, защото Част 3 е възстановена
+        
+            // Инициализиране на Lucide иконите
+            lucide.createIcons();
         });
     </script>
 
